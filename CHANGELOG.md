@@ -1,5 +1,8 @@
 ## Changelog
 
+### [00012] - [19/FEB/20025] @Julio Villagrana
+- Add PWA
+
 ### [00011] - [19/FEB/2025] @Julio Villagrana
 - Init Digital Platforms Server
 - Add Releseas service API
