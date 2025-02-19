@@ -7,4 +7,5 @@ export default {
   users:  buildPath(apiVersion,'/users'),
   sms:    buildPath(apiVersion,'/sms'),
   upload: buildPath(apiVersion,'/upload'),
+  releases: buildPath(apiVersion,'/releases'),
 };

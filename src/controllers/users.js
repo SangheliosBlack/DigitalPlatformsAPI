@@ -8,7 +8,7 @@ var UserController = {
 
     const users = await User.find();
 
-    res.status(200).json(RequestUtil.prepareSingleResponse('success', users, 'List of users'));
+    res.status(200).json(RequestUtil.prepareSingleResponse('SUCCESS', users, 'List of users'));
 
   }),
   getUserById: catchAsync(async (req, res, next) => {
@@ -21,7 +21,7 @@ var UserController = {
 
     }
 
-    res.status(200).json(RequestUtil.prepareSingleResponse('success', user, 'User by id'));
+    res.status(200).json(RequestUtil.prepareSingleResponse('SUCCESS', user, 'User by id'));
 
   }),
   updateUser: catchAsync(async (req, res, next) => {
@@ -34,7 +34,7 @@ var UserController = {
 
     }
 
-    res.status(200).json(RequestUtil.prepareSingleResponse('success', user, 'User updated'));
+    res.status(200).json(RequestUtil.prepareSingleResponse('SUCCESS', user, 'User updated'));
 
   }),
   deleteUser: catchAsync(async (req, res, next) => {
@@ -47,7 +47,7 @@ var UserController = {
 
     }
 
-    res.status(200).json(RequestUtil.prepareSingleResponse('success', { ok: true }, 'User deleted'));
+    res.status(200).json(RequestUtil.prepareSingleResponse('SUCCESS', { ok: true }, 'User deleted'));
 
   })
   

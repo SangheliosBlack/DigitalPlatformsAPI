@@ -1,5 +1,9 @@
 ## Changelog
 
+### [00011] - [19/FEB/2025] @Julio Villagrana
+- Init Digital Platforms Server
+- Add Releseas service API
+
 ### [00010] - [18/FEB/2025] @Julio Villagrana
 - Add upload files to azure blob @azure/storage-blob
 

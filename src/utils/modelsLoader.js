@@ -32,7 +32,7 @@ const ${modelNameCamelCase}Controller = {
     getAll${modelNameCamelCase}: catchAsync(async (req, res, next) => {
         try {
             const ${modelNameCamelCase.toLowerCase()} = await ${modelNameCamelCase}.find();
-            res.status(200).json(RequestUtil.prepareSingleResponse('success', ${modelNameCamelCase.toLowerCase()}, 'data'));
+            res.status(200).json(RequestUtil.prepareSingleResponse('SUCCESS', ${modelNameCamelCase.toLowerCase()}, 'data'));
         } catch (error) {
             next(new AppError(500, 'An error occurred in this operation.', 'APP_00', 'data', [{ message: error.message }]));
         }
@@ -41,7 +41,7 @@ const ${modelNameCamelCase}Controller = {
     get${modelNameCamelCase}ById: catchAsync(async (req, res, next) => {
         try {
             const ${modelNameCamelCase.toLowerCase()} = await ${modelNameCamelCase}.findById(req.params.id);
-            res.status(200).json(RequestUtil.prepareSingleResponse('success', ${modelNameCamelCase.toLowerCase()}, 'data'));
+            res.status(200).json(RequestUtil.prepareSingleResponse('SUCCESS', ${modelNameCamelCase.toLowerCase()}, 'data'));
         } catch (error) {
             next(new AppError(500, 'An error occurred in this operation.', 'APP_00', 'data', [{ message: error.message }]));
         }
@@ -51,7 +51,7 @@ const ${modelNameCamelCase}Controller = {
         try {
             const new${modelNameCamelCase} = new ${modelNameCamelCase}(req.body);
             await new${modelNameCamelCase}.save();
-            res.status(200).json(RequestUtil.prepareSingleResponse('success', { ${modelNameCamelCase.toLowerCase()}: new${modelNameCamelCase} }, 'data'));
+            res.status(200).json(RequestUtil.prepareSingleResponse('SUCCESS', { ${modelNameCamelCase.toLowerCase()}: new${modelNameCamelCase} }, 'data'));
         } catch (error) {
             next(new AppError(500, 'An error occurred in this operation.', 'APP_00', 'data', [{ message: error.message }]));
         }
@@ -60,7 +60,7 @@ const ${modelNameCamelCase}Controller = {
     update${modelNameCamelCase}: catchAsync(async (req, res, next) => {
         try {
             const ${modelNameCamelCase.toLowerCase()} = await ${modelNameCamelCase}.findByIdAndUpdate(req.params.id, req.body, { new: true });
-            res.status(200).json(RequestUtil.prepareSingleResponse('success', ${modelNameCamelCase.toLowerCase()}, 'data'));
+            res.status(200).json(RequestUtil.prepareSingleResponse('SUCCESS', ${modelNameCamelCase.toLowerCase()}, 'data'));
         } catch (error) {
             next(new AppError(500, 'An error occurred in this operation.', 'APP_00', 'data', [{ message: error.message }]));
         }
@@ -69,7 +69,7 @@ const ${modelNameCamelCase}Controller = {
     delete${modelNameCamelCase}: catchAsync(async (req, res, next) => {
         try {
             await ${modelNameCamelCase}.findByIdAndDelete(req.params.id);
-            res.status(200).json(RequestUtil.prepareSingleResponse('success', { ok: true }, 'data'));
+            res.status(200).json(RequestUtil.prepareSingleResponse('SUCCESS', { ok: true }, 'data'));
         } catch (error) {
             next(new AppError(500, 'An error occurred in this operation.', 'APP_00', 'data', [{ message: error.message }]));
         }
@@ -139,7 +139,7 @@ router.get("/", checkPermissions('read', 'all'), ${modelNameCamelCase}Controller
  *             $ref: '#/components/schemas/${modelNameCamelCase}'
  *     responses:
  *       200:
- *         description: ${modelNameCamelCase} created successfully
+ *         description: ${modelNameCamelCase} created SUCCESSfully
  */
 router.post("/", checkPermissions('read', 'all'), ${modelNameCamelCase}Controller.createNew${modelNameCamelCase});
 
@@ -184,7 +184,7 @@ router.get("/:id", checkPermissions('read', 'all'), ${modelNameCamelCase}Control
  *             $ref: '#/components/schemas/${modelNameCamelCase}'
  *     responses:
  *       200:
- *         description: ${modelNameCamelCase} updated successfully
+ *         description: ${modelNameCamelCase} updated SUCCESSfully
  */
 router.patch("/:id", checkPermissions('read', 'all'), ${modelNameCamelCase}Controller.update${modelNameCamelCase});
 
@@ -203,7 +203,7 @@ router.patch("/:id", checkPermissions('read', 'all'), ${modelNameCamelCase}Contr
  *           type: string
  *     responses:
  *       200:
- *         description: ${modelNameCamelCase} deleted successfully
+ *         description: ${modelNameCamelCase} deleted SUCCESSfully
  */
 router.delete("/:id", checkPermissions('read', 'all'), ${modelNameCamelCase}Controller.delete${modelNameCamelCase});
 

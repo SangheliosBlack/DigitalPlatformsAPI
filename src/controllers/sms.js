@@ -26,7 +26,7 @@ var SmsController = {
   
       const response = await axiosSmsInstance.post('json/send',data);
       
-      res.status(200).json(RequestUtil.prepareResponse('success', response, 'Send Single SMS'));
+      res.status(200).json(RequestUtil.prepareResponse('SUCCESS', response, 'Send Single SMS'));
 
     } catch (error) {
       
@@ -39,7 +39,7 @@ var SmsController = {
 
     const response = await axiosSmsInstance.get('json/balance');
 
-    res.status(200).json(RequestUtil.prepareResponse('success', response, 'Current balance'));
+    res.status(200).json(RequestUtil.prepareResponse('SUCCESS', response, 'Current balance'));
 
   }),
   sendOTP: catchAsync( async (req,res,next) => {
@@ -63,7 +63,7 @@ var SmsController = {
           "status": data 
         }
  
-        res.status(200).json(RequestUtil.prepareResponse('success', response, 'OTP sent successfully'));
+        res.status(200).json(RequestUtil.prepareResponse('SUCCESS', response, 'OTP sent SUCCESSfully'));
 
       }else{
 
@@ -74,7 +74,7 @@ var SmsController = {
           "status": data 
         }
  
-        res.status(200).json(RequestUtil.prepareResponse('success', response, 'OTP sent successfully'));
+        res.status(200).json(RequestUtil.prepareResponse('SUCCESS', response, 'OTP sent SUCCESSfully'));
 
       }
  
@@ -97,7 +97,7 @@ var SmsController = {
   
        const response = await axiosSmsInstance.get(`otp/resendCode?env=${encodeURIComponent(env)}&sender=${encodeURIComponent(sender)}&phone_number=${encodeURIComponent(phone_number)}&message=${encodeURIComponent(message)}`);
   
-       res.status(200).json(RequestUtil.prepareResponse('success', response, 'OTP resend successfully'));
+       res.status(200).json(RequestUtil.prepareResponse('SUCCESS', response, 'OTP resend SUCCESSfully'));
      
      } catch (error) {
  
@@ -133,7 +133,7 @@ var SmsController = {
 
       }
   
-      res.status(200).json(RequestUtil.prepareResponse('success', response, 'OTP validate successfully'));
+      res.status(200).json(RequestUtil.prepareResponse('SUCCESS', response, 'OTP validate SUCCESSfully'));
      
     } catch (error) {
  
@@ -169,7 +169,7 @@ var SmsController = {
 
       }
   
-      res.status(200).json(RequestUtil.prepareResponse('success', response, 'OTP checked successfully'));
+      res.status(200).json(RequestUtil.prepareResponse('SUCCESS', response, 'OTP checked SUCCESSfully'));
      
     } catch (error) {
  
@@ -192,14 +192,14 @@ var SmsController = {
       "otp_list":response
     };
 
-    res.status(200).json(RequestUtil.prepareResponse('success', data, 'List of OTP codes obtained successfully'));
+    res.status(200).json(RequestUtil.prepareResponse('SUCCESS', data, 'List of OTP codes obtained SUCCESSfully'));
 
   }),
   catchError: catchAsync(async(req,res,next)=>{
 
     console.log(req.body);
 
-    res.status(200).json(RequestUtil.prepareResponse('success', req.body, 'List of OTP codes obtained successfully'));
+    res.status(200).json(RequestUtil.prepareResponse('SUCCESS', req.body, 'List of OTP codes obtained SUCCESSfully'));
 
   })
 }

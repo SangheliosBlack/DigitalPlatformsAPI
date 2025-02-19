@@ -32,6 +32,7 @@ const RequestUtil = {
   prepareResponse(status, message, data,links) {
     return {
       status: status,
+      statusCode: status === 'SUCCESS' ? 200 : 500,
       message: message,
       meta: {
         "version": "1.0.0",

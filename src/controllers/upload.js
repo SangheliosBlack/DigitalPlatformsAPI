@@ -26,7 +26,7 @@ var UploadController = {
         if (err) {
 
           res.status(200).json(
-            RequestUtil.prepareResponse("success", "Invoice uploaded and analyzed successfully", {
+            RequestUtil.prepareResponse("SUCCESS", "Invoice uploaded and analyzed SUCCESSfully", {
               data: data['documents']
             })
           );
@@ -48,7 +48,7 @@ var UploadController = {
         AzureDocumentIntelligenceUtils.removeBoundingRegions(response);
 
         res.status(200).json(
-          RequestUtil.prepareResponse("success", "Invoice uploaded and analyzed successfully",response)
+          RequestUtil.prepareResponse("SUCCESS", "Invoice uploaded and analyzed SUCCESSfully",response)
         );
 
 
@@ -65,7 +65,7 @@ var UploadController = {
       const analysisResult = await DocumentService.analyzeInvoice(fileName);
 
       res.status(200).json(
-        RequestUtil.prepareResponse("success", "Invoice uploaded and analyzed successfully", {
+        RequestUtil.prepareResponse("SUCCESS", "Invoice uploaded and analyzed SUCCESSfully", {
           fileUrl,
           analysis: analysisResult,
         })

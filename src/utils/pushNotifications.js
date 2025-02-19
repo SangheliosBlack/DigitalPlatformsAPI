@@ -62,7 +62,7 @@ module.exports = {sendPushToOneUser};
 function sendMessage(message){
     admin.messaging().send(message)
     .then((response)=>{
-        console.log('Successfully sent message',response);
+        console.log('SUCCESSfully sent message',response);
     }).catch((error)=>{
         console.log('Error sending message',error);
     });

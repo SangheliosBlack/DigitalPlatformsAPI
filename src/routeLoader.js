@@ -12,4 +12,7 @@ export default async function loadRoutes(app, routes) {
   const uploadRoutes = await import('./routes/upload.js');
   app.use(routes.upload, uploadRoutes.default);
 
+  const releasesRoutes = await import('./routes/releases.js');
+  app.use(routes.releases, releasesRoutes.default);
+
 }

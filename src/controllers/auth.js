@@ -21,7 +21,7 @@ const AuthController = {
       if (existEmail) {
         return res.status(400).json(
           RequestUtil.prepareResponse(
-            'success',
+            'SUCCESS',
             `Este correo electrónico ya está registrado`,
             {},
           )
@@ -31,7 +31,7 @@ const AuthController = {
       if(existPhone){
         return res.status(400).json(
           RequestUtil.prepareResponse(
-            'success',
+            'SUCCESS',
             `Este numero telefonico ya está registrado`,
             {},
           )
@@ -59,12 +59,12 @@ const AuthController = {
 
       return res.status(200).json(
         RequestUtil.prepareResponse(
-          'success',
+          'SUCCESS',
+          `Usuario creado con éxito`,
           {
             user,
             accessToken
           },
-          `Usuario creado con éxito`
         )
       );
 
@@ -109,8 +109,8 @@ const AuthController = {
 
             return res.status(200).json(
               RequestUtil.prepareResponse(
-                'success',
-                `Login successful`,
+                'SUCCESS',
+                `Login SUCCESSful`,
                 {
                   user,
                   accessToken
@@ -139,7 +139,7 @@ const AuthController = {
 
       return res.status(200).json(
         RequestUtil.prepareResponse(
-          'success',
+          'SUCCESS',
           `Token refrescado exitosamente`,
           {
             //user:req.user,
