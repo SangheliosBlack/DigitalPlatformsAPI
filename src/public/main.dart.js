@@ -96772,7 +96772,7 @@ while(true)switch(s){case 0:n=p.a
 n===$&&A.b()
 o=n.cA(0,$.bco(),t.JT)
 p.gaK().cC(0)
-if(p.gaK().gcl().f===B.ff)o.$1("/point-of-sale")
+if(p.gaK().gcl().f===B.ff)o.$1("/admin")
 else{p.gaK().cC(0)
 if(p.gaK().gcl().f===B.ee)o.$1("/auth")}s=1
 break
