@@ -35,7 +35,11 @@ const User_Schema = Schema({
         type:Boolean,
         required:true,
         default:false
-    }
+    },
+    roleName:{
+      type:String,
+      required:true
+    },
 }, {
     timestamps: true
 });
