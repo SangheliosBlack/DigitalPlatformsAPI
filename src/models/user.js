@@ -36,7 +36,7 @@ const User_Schema = Schema({
         required:true,
         default:false
     },
-    roleName:{
+    role_name:{
       type:String,
       required:true
     },

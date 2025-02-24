@@ -52,7 +52,7 @@ const AuthController = {
       user.email = email.toLowerCase();
       user.phone = phone;
       user.role = Roles.USER;
-      user.roleName = "Pending";
+      user.role_name = "Pending";
 
       await user.save();
 
