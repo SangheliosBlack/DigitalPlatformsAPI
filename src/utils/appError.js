@@ -16,12 +16,12 @@ class AppError extends Error {
     if (typeof statusCode !== 'number' || !Number.isInteger(statusCode)) {
       throw new Error('Status code must be an integer');
     }
-
+    
+    this.status = `${statusCode}`.startsWith('4') ? 'fail' : 'error';
     this.statusCode = statusCode;
     this.usrCode = usrCode;
     this.details = details || [];
     this.field = field;
-    this.status = `${statusCode}`.startsWith('4') ? 'fail' : 'error';
     this.isOperational = true;
 
     Error.captureStackTrace(this, this.constructor);
