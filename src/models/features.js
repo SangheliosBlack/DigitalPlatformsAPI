@@ -16,10 +16,14 @@ const Feature_Schema = new Schema(
     },
     list_improvements: [
       {
-        type: Schema.Types.ObjectId,
-        ref: "improvements"
+        title: { type: String, required: true },
+        description: { type: String }
       }
     ],
+    status:{
+      type:Number,
+      required: true,
+    }
   },
   {
     timestamps: true

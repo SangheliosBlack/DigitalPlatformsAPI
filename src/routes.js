@@ -8,5 +8,6 @@ export default {
   sms:    buildPath(apiVersion,'/sms'),
   upload: buildPath(apiVersion,'/upload'),
   releases: buildPath(apiVersion,'/releases'),
-  features:  buildPath(apiVersion,'/features')
+  features:  buildPath(apiVersion,'/features'),
+  featuresSurvey:  buildPath(apiVersion,'/featureSurvey')
 };

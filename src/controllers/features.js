@@ -3,11 +3,12 @@ import RequestUtil from '../utils/requestUtils.js';
 import Constants from '../utils/constants.js';
 
 import Feature from '../models/features.js';
+import FeatureSurvery from '../models/features_surveys.js';
 import Improvements from '../models/improvements.js';
 
 var FeaturesController = {
 
-  getFeatures: catchAsync(async (req, res, next) => {
+  getFeatureById: catchAsync(async (req, res, next) => {
 
     try {
 
@@ -35,9 +36,71 @@ var FeaturesController = {
 
     try {
 
-      const features = await Feature.find();
+      const features = await Feature.aggregate([
+        {
+          $lookup: {
+            from: "features_surveys",
+            localField: "_id",
+            foreignField: "feature", 
+            as: "surveyData"
+          }
+        },
+        {
+          $addFields: {
+            survey_quantity: {
+              $cond: {
+                if: { $eq: [{ $size: "$surveyData" }, 0] }, 
+                then: 0, 
+                else: { 
+                  $size: "$surveyData" 
+                }
+              }
+            },
+            survey_average: {
+              $cond: {
+                if: { $eq: [{ $size: "$surveyData" }, 0] },
+                then: 0, 
+                else: {
+                  $round: [{ $multiply: [{ $avg: "$surveyData.rating_feature_type" }, 5] }, 2]
+                }
+              }
+            }
+          }
+        },
+        {
+          $project: {
+            surveyData: 0 
+          }
+        },
+        {
+          $lookup: {
+            from: "users", 
+            localField: "user",
+            foreignField: "_id",
+            as: "user"
+          },
+        },
+        {
+          $project: {
+            title: 1,
+            status: 1,
+            list_improvements: 1,
+            _id: 1,
+            createdAt: 1,
+            updatedAt: 1,
+            "user._id": 1,
+            "user.full_name": 1,
+            "user.image_url": 1,
+            survey_quantity: 1,
+            survey_average: 1,
+          }
+        },
+        {
+          $unwind: "$user" 
+        }
+      ]);
 
-      res.status(200).json(RequestUtil.prepareResponse('SUCCESS', 'Get all Features succesfully ',features));
+      res.status(200).json(RequestUtil.prepareResponse('SUCCESS', 'Get all Features succesfully',features));
 
     } catch (error) {
 

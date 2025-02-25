@@ -14,5 +14,9 @@ const featureCreateSchema = Joi.object({
     "array.includes": "List improvements must be an array of strings",
     "any.required": "List improvements are required"
   }),
+  status: Joi.number().required().messages({
+    "number.base": "Status field must be a number",
+    "any.required": "Status field is required"
+  })
 });
 export default featureCreateSchema;

@@ -14,7 +14,7 @@ router.use(passport.authenticate('jwt', {session: false}));
 
 router.get("/", checkPermissions('read','all'), FeaturesController.getAllFeatures);
 
-router.get("/:id", checkPermissions('read','all'),validateMongoId, FeaturesController.getFeatures);
+router.get("/:id", checkPermissions('read','all'),validateMongoId, FeaturesController.getFeatureById);
 
 router.post("/", checkPermissions('read','all'),validateSchema(validator.featuresCreateSchema), FeaturesController.createFeatures);
 
