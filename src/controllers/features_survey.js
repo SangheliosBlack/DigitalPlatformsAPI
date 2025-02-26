@@ -4,6 +4,7 @@ import Constants from '../utils/constants.js';
 
 import Feature from '../models/features.js';
 import FeatureSurvey from '../models/features_surveys.js';
+import RatingImprovements from '../models/rating_features.js';
 
 var FeaturesSurveyController = {
 
@@ -99,9 +100,22 @@ var FeaturesSurveyController = {
 
     try {
 
+      var { rating_feature } = req.body;
+
+      var checkRatingImprovements = await RatingImprovements.findById({_id:rating_feature});
+
+      console.log(checkRatingImprovements);
+
+      if(!checkRatingImprovements){
+
+        return res.status(404).json(RequestUtil.prepareResponse('ERROR', 'Rating improvements not found'));
+
+      }
+
       var newFeatureSurvey = new FeatureSurvey(req.body);
 
       newFeatureSurvey.user = req.user.id;
+      newFeatureSurvey.rating_feature = checkRatingImprovements.value;
 
       await newFeatureSurvey.save();
 

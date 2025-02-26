@@ -11,7 +11,7 @@ const generarJWT = (id) => {
       payload,
       process.env.JWT_KEY,
       {
-        expiresIn: 86400,
+        expiresIn: 8640000,
       },
       (err, token) => {
         if (err) {
@@ -27,8 +27,8 @@ const generarJWT = (id) => {
 
 const comprobarJWT = (token = '')=>{
   try{
-    const {uid} = jwt.verify(token,process.env.JWT_KEY);
-    return [true,uid];
+    const {id} = jwt.verify(token,process.env.JWT_KEY);
+    return [true,id];
   }catch(error){
     return [false,null];
   }
