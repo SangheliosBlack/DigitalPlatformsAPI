@@ -4,7 +4,7 @@ const { Schema,model } = mongoose;
 
 const Feature_Survey_Schema = new Schema(
   {
-    rating_feature_type: {
+    rating_feature: {
       type: Number,
       required: true
     },

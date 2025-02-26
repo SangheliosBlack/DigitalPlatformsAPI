@@ -134,16 +134,14 @@ const AuthController = {
             
       if(error) return next(error);
 
-      const accessToken = signToken({
-        id:req.user.id
-      });
+      const accessToken = await jwthelper.generarJWT(req.user.id);
 
       return res.status(200).json(
         RequestUtil.prepareResponse(
           'SUCCESS',
-          `Token refrescado exitosamente`,
+          'Token refreshed successfully',
           {
-            //user:req.user,
+            user:req.user,
             accessToken
           },
           

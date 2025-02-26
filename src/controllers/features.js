@@ -61,10 +61,11 @@ var FeaturesController = {
                 if: { $eq: [{ $size: "$surveyData" }, 0] },
                 then: 0, 
                 else: {
-                  $round: [{ $multiply: [{ $avg: "$surveyData.rating_feature_type" }, 5] }, 2]
+                  $round: [{ $multiply: [{ $avg: "$surveyData.rating_feature_type" }, 4] }, 2]
                 }
               }
-            }
+            },
+            surver_max: 4
           }
         },
         {
@@ -93,6 +94,7 @@ var FeaturesController = {
             "user.image_url": 1,
             survey_quantity: 1,
             survey_average: 1,
+            surver_max: 4
           }
         },
         {
