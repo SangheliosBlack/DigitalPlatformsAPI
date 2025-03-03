@@ -1,4 +1,3 @@
-import { bool, required } from "joi";
 import mongoose from "mongoose";
 
 const { Schema, model } = mongoose;
@@ -10,13 +9,13 @@ const Rating_Improvements_Schema = new Schema(
       required: true,
       trim: true
     },
-    type:{
-      type:int,
-      required:true,
-    },
     active:{
       type:Boolean,
-      required:true
+      required:true,
+    },
+    value:{
+      type:Number,
+      required:true,
     },
   }
 );
