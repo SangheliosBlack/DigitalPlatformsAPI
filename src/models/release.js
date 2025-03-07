@@ -31,7 +31,7 @@ const Release_Schema = new Schema(
 
 Release_Schema.methods.toJSON = function () {
     const { __v, _id, ...object } = this.toObject();
-    object.id = _id;
+    object.id_ = _id;
     return object;
 };
 

@@ -94,11 +94,15 @@ var FeaturesController = {
             "user.image_url": 1,
             survey_quantity: 1,
             survey_average: 1,
-            surver_max: 4
+            survey_max: { $literal: 4 },
+            description: 1
           }
         },
         {
           $unwind: "$user" 
+        },
+        {
+          $sort: { createdAt: -1 } 
         }
       ]);
 
@@ -126,7 +130,9 @@ var FeaturesController = {
 
       await newFeature.save();
 
-      res.status(200).json(RequestUtil.prepareResponse('SUCCESS', 'Create Features succesfully ',newFeature));
+      const feature = await Feature.findById(newFeature.id).populate('user', 'id full_name image_url');
+
+      res.status(200).json(RequestUtil.prepareResponse('SUCCESS', 'Create Features succesfully ',feature));
 
     } catch (error) {
 

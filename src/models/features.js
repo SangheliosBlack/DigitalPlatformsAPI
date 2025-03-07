@@ -9,6 +9,11 @@ const Feature_Schema = new Schema(
       required: true,
       trim: true
     },
+    description: {
+      type: String,
+      required: true,
+      trim: true
+    },
     user: {
       type: Schema.Types.ObjectId,
       ref: "users",
@@ -32,7 +37,7 @@ const Feature_Schema = new Schema(
 
 Feature_Schema.methods.toJSON = function () {
   const { __v, _id, ...object } = this.toObject();
-  object.id = _id;
+  object._id = _id;
   return object;
 };
 
