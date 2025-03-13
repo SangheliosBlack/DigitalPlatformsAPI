@@ -1,6 +1,6 @@
 import Joi from 'joi';
 
-const featureSurveyCreateSchema = Joi.object({
+const featureSurveyUpdateSchema = Joi.object({
   rating_feature: Joi.string().regex(/^[0-9a-fA-F]{24}$/).required().messages({
     "string.pattern.base": "ID must be a valid MongoDB ObjectId",
     "any.required": "ID is required"
@@ -8,9 +8,9 @@ const featureSurveyCreateSchema = Joi.object({
   comment: Joi.string().optional().messages({
     "string.base": "Optional field must be a string"
   }),
-  feature: Joi.string().regex(/^[0-9a-fA-F]{24}$/).required().messages({
+  survey_id: Joi.string().regex(/^[0-9a-fA-F]{24}$/).required().messages({
     "string.pattern.base": "ID must be a valid MongoDB ObjectId",
     "any.required": "ID is required"
   }),
 });
-export default featureSurveyCreateSchema;
+export default featureSurveyUpdateSchema;

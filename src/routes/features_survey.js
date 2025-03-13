@@ -20,7 +20,7 @@ router.get('/byFeature/:id', checkPermissions('read','all'),validateMongoId, Fea
 
 router.post("/", checkPermissions('read','all'),validateSchema(validator.featureSurveyCreateSchema), FeaturesSurveyController.createFeaturesSurvey);
 
-router.patch("/:id", checkPermissions('read','all'),validateMongoId, validateSchema(validator.featureSurveyCreateSchema) ,FeaturesSurveyController.updateFeaturesSurvey);
+router.patch("/", checkPermissions('read','all'), validateSchema(validator.featureSurveyUpdateSchema) ,FeaturesSurveyController.updateFeaturesSurvey);
 
 router.delete("/:id", checkPermissions('read','all'),validateMongoId, FeaturesSurveyController.deleteFeaturesSurvey);
 

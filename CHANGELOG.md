@@ -1,5 +1,9 @@
 ## Changelog
 
+### [00013] - [13/MARZO/2025] - Julio Villagrana Martinez
+- Complete features and features surveys
+- Now the features can be ini by type
+
 ### [00012] - [19/FEB/20025] @Julio Villagrana
 - Add PWA
 

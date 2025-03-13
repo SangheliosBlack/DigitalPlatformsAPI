@@ -5,6 +5,9 @@ import Constants from '../utils/constants.js';
 import Feature from '../models/features.js';
 import FeatureSurvery from '../models/features_surveys.js';
 import Improvements from '../models/improvements.js';
+import RatingImprovements from '../models/rating_features.js';
+
+import mongoose from "mongoose";
 
 var FeaturesController = {
 
@@ -39,63 +42,64 @@ var FeaturesController = {
       const features = await Feature.aggregate([
         {
           $lookup: {
-            from: "features_surveys",
-            localField: "_id",
-            foreignField: "feature", 
-            as: "surveyData"
+        from: "features_surveys",
+        localField: "_id",
+        foreignField: "feature", 
+        as: "surveyData"
           }
         },
         {
           $addFields: {
-            survey_quantity: {
-              $cond: {
-                if: { $eq: [{ $size: "$surveyData" }, 0] }, 
-                then: 0, 
-                else: { 
-                  $size: "$surveyData" 
-                }
-              }
-            },
-            survey_average: {
-              $cond: {
-                if: { $eq: [{ $size: "$surveyData" }, 0] },
-                then: 0, 
-                else: {
-                  $round: [{ $multiply: [{ $avg: "$surveyData.rating_feature_type" }, 4] }, 2]
-                }
-              }
-            },
-            surver_max: 4
+        survey_quantity: {
+          $cond: {
+            if: { $eq: [{ $size: "$surveyData" }, 0] }, 
+            then: 0, 
+            else: { 
+          $size: "$surveyData" 
+            }
+          }
+        },
+        survey_average: {
+          $cond: {
+            if: { $eq: [{ $size: "$surveyData" }, 0] },
+            then: 0, 
+            else: {
+          "$round": [{"$multiply": [{"$divide": [{ "$avg": "$surveyData.rating_feature" }, 4]},4]},2
+          ]
+            }
+          }
+        },
+        surver_max: 4
           }
         },
         {
           $project: {
-            surveyData: 0 
+        surveyData: 0 
           }
         },
         {
           $lookup: {
-            from: "users", 
-            localField: "user",
-            foreignField: "_id",
-            as: "user"
+        from: "users", 
+        localField: "user",
+        foreignField: "_id",
+        as: "user"
           },
         },
         {
           $project: {
-            title: 1,
-            status: 1,
-            list_improvements: 1,
-            _id: 1,
-            createdAt: 1,
-            updatedAt: 1,
-            "user._id": 1,
-            "user.full_name": 1,
-            "user.image_url": 1,
-            survey_quantity: 1,
-            survey_average: 1,
-            survey_max: { $literal: 4 },
-            description: 1
+        title: 1,
+        status: 1,
+        list_improvements: 1,
+        _id: 1,
+        createdAt: 1,
+        updatedAt: 1,
+        "user._id": 1,
+        "user.full_name": 1,
+        "user.image_url": 1,
+        survey_quantity: 1,
+        survey_average: 1,
+        survey_max: { $literal: 4 },
+        description: 1
           }
         },
         {
@@ -103,6 +107,51 @@ var FeaturesController = {
         },
         {
           $sort: { createdAt: -1 } 
+        },
+        {
+          $lookup: {
+            from: "rating_improvements",
+            pipeline: [
+              {
+                $match: {}
+              }
+            ],
+            as: "answers"
+          }
+        },
+        {
+          $lookup: {
+            from: "features_surveys",
+            let: { featureId: "$_id" },
+            pipeline: [
+              {
+                $match: {
+                  $expr: {
+                    $and: [
+                      { $eq: ["$feature", "$$featureId"] },
+                      { $eq: ["$user", new mongoose.Types.ObjectId(req.user.id)] }
+                    ]
+                  }
+                }
+              },
+              {
+                $project: {
+                  _id: 1, 
+                  comment: 1,
+                  feature: 1,
+                  rating_feature: 1,
+                  createdAt: 1
+                }
+              }
+            ],
+            as: "answer_survey"
+          }
+        },
+        {
+          $unwind: {
+            path: "$answer_survey",
+            preserveNullAndEmptyArrays: true 
+          }
         }
       ]);
 
@@ -122,7 +171,9 @@ var FeaturesController = {
 
       var newFeature = new Feature(req.body);
 
-      const improvements = req.body.list_improvements.map(improvement => new Improvements({title:improvement}));
+      const improvements = req.body.list_improvements
+        .filter(improvement => improvement.split(' ').length > 1)
+        .map(improvement => new Improvements({title: improvement}));
 
       newFeature.list_improvements = improvements;
 
@@ -130,9 +181,18 @@ var FeaturesController = {
 
       await newFeature.save();
 
-      const feature = await Feature.findById(newFeature.id).populate('user', 'id full_name image_url');
+      var feature = await Feature.findById(newFeature.id).populate('user', 'id full_name image_url');
 
-      res.status(200).json(RequestUtil.prepareResponse('SUCCESS', 'Create Features succesfully ',feature));
+      const answers = await RatingImprovements.find();
+
+      let featureObj = feature.toObject(); 
+
+      featureObj.survey_quantity = 0;
+      featureObj.survey_average = 0;
+      featureObj.survey_max = 4;
+      featureObj.answers = answers;
+
+      res.status(200).json(RequestUtil.prepareResponse('SUCCESS', 'Create Features succesfully ',featureObj));
 
     } catch (error) {
 
