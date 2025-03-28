@@ -9,5 +9,6 @@ export default {
   upload: buildPath(apiVersion,'/upload'),
   releases: buildPath(apiVersion,'/releases'),
   features:  buildPath(apiVersion,'/features'),
-  featuresSurvey:  buildPath(apiVersion,'/featureSurvey')
+  featuresSurvey:  buildPath(apiVersion,'/featureSurvey'),
+  commercialFigures: buildPath(apiVersion,'/commercialFigures')
 };

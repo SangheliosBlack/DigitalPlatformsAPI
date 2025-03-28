@@ -1,3 +1,4 @@
+import { QueryDocumentSnapshot } from 'firebase-admin/firestore';
 import Joi from 'joi';
 
 const releaseCreateSchema = Joi.object({
@@ -9,13 +10,15 @@ const releaseCreateSchema = Joi.object({
     "string.empty": "Description cannot be empty",
     "any.required": "Description is required"
   }),
-  imageUrl: Joi.string().trim().uri().required().messages({
-    "string.uri": "Image must be a valid URL",
-    "any.required": "Image is required"
+  quarter: Joi.number().integer().required().messages({
+    "number.base": "Quarter must be a number",
+    "number.integer": "Quarter must be an integer",
+    "any.required": "Quarter is required"
   }),
-  user: Joi.string().trim().required().messages({
-    "any.required": "User is required"
-  })
+  commercial_figure: Joi.string().regex(/^[0-9a-fA-F]{24}$/).required().messages({
+    "string.pattern.base": "ID must be a valid MongoDB ObjectId",
+    "any.required": "ID is required"
+  }),
 });
 
 export default releaseCreateSchema;

@@ -21,4 +21,7 @@ export default async function loadRoutes(app, routes) {
   const featuresSurvey = await import('./routes/features_survey.js');
   app.use(routes.featuresSurvey,featuresSurvey.default);
 
+  const commercialFigures = await import('./routes/commercial_figures.js');
+  app.use(routes.commercialFigures,commercialFigures.default);
+
 }
