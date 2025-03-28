@@ -17,6 +17,10 @@ const featureCreateSchema = Joi.object({
   status: Joi.number().required().messages({
     "number.base": "Status field must be a number",
     "any.required": "Status field is required"
-  })
+  }),
+  commercial_figure: Joi.string().regex(/^[0-9a-fA-F]{24}$/).required().messages({
+    "string.pattern.base": "ID must be a valid MongoDB ObjectId",
+    "any.required": "ID is required"
+  }),
 });
 export default featureCreateSchema;

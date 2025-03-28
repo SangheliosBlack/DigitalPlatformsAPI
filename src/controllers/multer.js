@@ -22,11 +22,6 @@ const fileFilter = (req, file, cb) => {
   if (extName && mimeType) {
     return cb(null, true);
   } else {
-
-    console.log(file.mimeType);
-
-    console.log(extName);
-
     cb(new Error('Formato de archivo no permitido'));
   }
 };

@@ -2,13 +2,19 @@ import catchAsync from "../utils/catchAsync.js";
 import RequestUtil from '../utils/requestUtils.js';
 import Constants from '../utils/constants.js';
 
+import UploadService from "../services/azureUploadService.js";
+
+import Release from '../models/release.js';
+
 var ReleasesController = {
 
-  getReleases: catchAsync(async (req, res, next) => {
+  getAllReleases: catchAsync(async (req, res, next) => {
 
     try {
 
-      res.status(200).json(RequestUtil.prepareResponse('SUCCESS', 'Get Releases',{}));
+      const allReleases = await Release.find().populate('user', "full_name image_url").sort({ createdAt: -1 });
+
+      res.status(200).json(RequestUtil.prepareResponse('SUCCESS', 'Get Releases',allReleases));
 
     } catch (error) {
 
@@ -36,9 +42,24 @@ var ReleasesController = {
 
     try {
 
-      res.status(200).json(RequestUtil.prepareResponse('SUCCESS', 'Create Release',{}));
+      console.log(req.file);
+
+      const fileUrl = await UploadService.uploadFile(req.file);
+
+      var newRelease = new Release(req.body);
+
+      newRelease.image_url = fileUrl;
+      newRelease.user = req.user.id;
+      
+      await newRelease.save();
+      
+      const getNewRelease = await Release.findById({_id:newRelease.id}).populate('user',"full_name image_url");
+
+      res.status(201).json(RequestUtil.prepareResponse('SUCCESS', 'Release created successfully', getNewRelease));
 
     } catch (error) {
+
+      console.log(error);
 
       res.status(500).json(RequestUtil.prepareResponse('error', error.response?.data.message,{}));
 
