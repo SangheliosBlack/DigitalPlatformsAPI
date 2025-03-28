@@ -19,6 +19,11 @@ const Feature_Schema = new Schema(
       ref: "users",
       required: true
     },
+    commercial_figure: {
+      type: Schema.Types.ObjectId,
+      ref: "commercial_figures",
+      required: true
+    },
     list_improvements: [
       {
         title: { type: String, required: true },

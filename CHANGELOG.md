@@ -1,5 +1,8 @@
 ## Changelog
 
+### [00014] - [13/MARZO/2025] - Julio Villagrana Martinez
+- Add Releases feature
+
 ### [00013] - [13/MARZO/2025] - Julio Villagrana Martinez
 - Complete features and features surveys
 - Now the features can be ini by type

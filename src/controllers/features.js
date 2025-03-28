@@ -98,6 +98,7 @@ var FeaturesController = {
         "user.image_url": 1,
         survey_quantity: 1,
         survey_average: 1,
+        commercial_figure: 1,
         survey_max: { $literal: 4 },
         description: 1
           }
