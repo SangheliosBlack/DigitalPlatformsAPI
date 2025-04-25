@@ -2,6 +2,8 @@ import { BlobServiceClient } from "@azure/storage-blob";
 import fs from "fs";
 import mime from "mime-types"; 
 
+import path from 'path';
+
 const AZURE_STORAGE_CONNECTION_STRING = process.env.AZURE_STORAGE_CONNECTION_STRING;
 const containerName = process.env.AZURE_STORAGE_CONTAINER_NAME;
 
