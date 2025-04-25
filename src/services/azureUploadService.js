@@ -13,9 +13,21 @@ class UploadService {
 
   async uploadFile(file) {
 
+    const uploadPath = path.join('src', 'server', 'uploads', 'image');
+
+    if (!fs.existsSync(uploadPath)) {
+
+      console.log("The directory doestn exist")
+
+      fs.mkdirSync(uploadPath, { recursive: true });
+
+    }
+
     if (!file) {
       throw new Error("No file received.");
     }
+
+    
 
     const filePath = file.path;
     const fileName = file.originalname;
