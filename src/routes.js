@@ -10,5 +10,6 @@ export default {
   releases: buildPath(apiVersion,'/releases'),
   features:  buildPath(apiVersion,'/features'),
   featuresSurvey:  buildPath(apiVersion,'/featureSurvey'),
-  commercialFigures: buildPath(apiVersion,'/commercialFigures')
+  commercialFigures: buildPath(apiVersion,'/commercialFigures'),
+  versionCodes: buildPath(apiVersion,'/versionCodes'),
 };

@@ -24,4 +24,7 @@ export default async function loadRoutes(app, routes) {
   const commercialFigures = await import('./routes/commercial_figures.js');
   app.use(routes.commercialFigures,commercialFigures.default);
 
+  const versionCodes = await import('./routes/version_codes.js');
+  app.use(routes.versionCodes,versionCodes.default);
+
 }
