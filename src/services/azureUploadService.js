@@ -2,6 +2,8 @@ import { BlobServiceClient } from "@azure/storage-blob";
 import fs from "fs";
 import mime from "mime-types"; 
 
+import path from 'path';
+
 const AZURE_STORAGE_CONNECTION_STRING = process.env.AZURE_STORAGE_CONNECTION_STRING;
 const containerName = process.env.AZURE_STORAGE_CONTAINER_NAME;
 
@@ -13,9 +15,21 @@ class UploadService {
 
   async uploadFile(file) {
 
+    const uploadPath = path.join('src', 'server', 'uploads', 'image');
+
+    if (!fs.existsSync(uploadPath)) {
+
+      console.log("The directory doestn exist")
+
+      fs.mkdirSync(uploadPath, { recursive: true });
+
+    }
+
     if (!file) {
       throw new Error("No file received.");
     }
+
+    
 
     const filePath = file.path;
     const fileName = file.originalname;
