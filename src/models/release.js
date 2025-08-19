@@ -31,6 +31,12 @@ const Release_Schema = new Schema(
       type: Schema.Types.ObjectId,
       ref: "commercial_figures",
       required: true
+    },
+    version_code: {
+      type: Schema.Types.ObjectId,
+      ref: "version_codes",
+      required: true,
+      default: "689c7f510d05dee5029c05da"
     }
   },
   {
