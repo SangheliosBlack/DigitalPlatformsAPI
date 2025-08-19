@@ -14,6 +14,11 @@ const Version_Codes_Schema = new Schema(
       required:true,
       default :true
     },
+    current:{
+      type:Boolean,
+      required:true,
+      default :true
+    },
   },
   {
     timestamps: true
