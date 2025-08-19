@@ -12,7 +12,7 @@ var ReleasesController = {
 
     try {
 
-      const allReleases = await Release.find().populate('user', "full_name image_url").sort({ createdAt: -1 });
+      const allReleases = await Release.find().populate('user', "full_name image_url").populate('version_code','code') .sort({ createdAt: -1 });
 
       res.status(200).json(RequestUtil.prepareResponse('SUCCESS', 'Get Releases',allReleases));
 
@@ -42,18 +42,17 @@ var ReleasesController = {
 
     try {
 
-      console.log(req.file);
-
       const fileUrl = await UploadService.uploadFile(req.file);
 
       var newRelease = new Release(req.body);
 
       newRelease.image_url = fileUrl;
       newRelease.user = req.user.id;
+      newRelease.version_code = req.version_code
       
       await newRelease.save();
       
-      const getNewRelease = await Release.findById({_id:newRelease.id}).populate('user',"full_name image_url");
+      const getNewRelease = await Release.findById({_id:newRelease.id}).populate('user',"full_name image_url").populate('version_code','code');
 
       res.status(201).json(RequestUtil.prepareResponse('SUCCESS', 'Release created successfully', getNewRelease));
 
