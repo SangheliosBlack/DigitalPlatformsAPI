@@ -1,7 +1,7 @@
 ## Changelog
 
 ### [00015] - [13/AGO/2025] - @JULIO VILLAGRANA
-- Add Version Codes feature
+- Code version current flag added
 
 ### [00014] - [13/MARZO/2025] - Julio Villagrana Martinez
 - Add Releases feature
