@@ -42,13 +42,21 @@ var ReleasesController = {
 
     try {
 
-      const fileUrl = await UploadService.uploadFile(req.file);
+      let fileUrl = null;
+
+      if (req.file) {
+        fileUrl = await UploadService.uploadFile(req.file);
+      }
 
       var newRelease = new Release(req.body);
 
-      newRelease.image_url = fileUrl;
+      if (fileUrl) {
+
+        newRelease.image_url = fileUrl;
+        
+      }
+
       newRelease.user = req.user.id;
-      newRelease.version_code = req.version_code
       
       await newRelease.save();
       
