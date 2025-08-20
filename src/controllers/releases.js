@@ -12,7 +12,17 @@ var ReleasesController = {
 
     try {
 
-      const allReleases = await Release.find().populate('user', "full_name image_url").populate('version_code','code') .sort({ createdAt: -1 });
+      const { version } = req.query;
+
+      let filter = {};
+
+      if (version) {
+
+        filter.version_code = version; 
+
+      }
+
+      const allReleases = await Release.find(filter).populate('user', "full_name image_url").populate('version_code','code') .sort({ createdAt: -1 });
 
       res.status(200).json(RequestUtil.prepareResponse('SUCCESS', 'Get Releases',allReleases));
 
