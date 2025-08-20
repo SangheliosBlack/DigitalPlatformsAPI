@@ -1,5 +1,8 @@
 ## Changelog
 
+### [00017] - [20/AGO/2025] - @JULIO VILLAGRANA
+- Now the release feature can skip image blob
+
 ### [00016] - [19/AGO/2025] - @JULIO VILLAGRANA
 - Releases version code added to model
 
