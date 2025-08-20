@@ -16,7 +16,8 @@ const Release_Schema = new Schema(
     },
     image_url: {
       type: String,
-      required: true
+      required: false,
+      default: null
     },
     user: {
       type: Schema.Types.ObjectId,
@@ -35,7 +36,7 @@ const Release_Schema = new Schema(
     version_code: {
       type: Schema.Types.ObjectId,
       ref: "version_codes",
-      required: false,
+      required: true,
     }
   },
   {
