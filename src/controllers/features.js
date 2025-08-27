@@ -35,11 +35,36 @@ var FeaturesController = {
 
   }),
 
+  migrateFeatures: catchAsync(async (req, res, next) => {
+
+    try {
+      const codeVersionId = new mongoose.Types.ObjectId("689c8082700ee488a2890535");
+      //const codeVersionId = new mongoose.Types.ObjectId("689c7f510d05dee5029c05da");
+      const result = await Feature.updateMany(
+        {},
+        { $set: { version_code: codeVersionId } }
+      );
+      res.status(200).json(RequestUtil.prepareResponse('SUCCESS', 'Migrated features with code_version', result));
+    } catch (error) {
+      res.status(500).json(RequestUtil.prepareResponse('error', error.response?.data.message, {}));
+    }
+
+  }),
+
   getAllFeatures: catchAsync(async (req, res, next) => {
 
     try {
 
+      const { version } = req.query;
+
+      let matchStage = {};  
+
+      if (version) {
+        matchStage = { version_code: mongoose.Types.ObjectId.createFromHexString(version) };
+      }
+
       const features = await Feature.aggregate([
+        { $match: matchStage },
         {
           $lookup: {
         from: "features_surveys",
@@ -100,11 +125,41 @@ var FeaturesController = {
         survey_average: 1,
         commercial_figure: 1,
         survey_max: { $literal: 4 },
+        version_code:1,
         description: 1
           }
         },
         {
           $unwind: "$user" 
+        },
+        {
+          $lookup: {
+        from: "version_codes", 
+        localField: "version_code",
+        foreignField: "_id",
+        as: "version_code"
+          },
+        },
+        {
+          $project: {
+        title: 1,
+        status: 1,
+        list_improvements: 1,
+        _id: 1,
+        createdAt: 1,
+        updatedAt: 1,
+        user: 1,
+        survey_quantity: 1,
+        survey_average: 1,
+        commercial_figure: 1,
+        survey_max: { $literal: 4 },
+        "version_code._id": 1,
+        "version_code.code": 1,
+        description: 1,
+          }
+        },
+        {
+          $unwind: "$version_code" 
         },
         {
           $sort: { createdAt: -1 } 

@@ -141,10 +141,27 @@ const AuthController = {
           'SUCCESS',
           'Token refreshed successfully',
           {
-            user:req.user,
             accessToken
           },
           
+        )
+      );
+
+    })
+  },
+  userMe: async (req, res) => {
+
+    req.login(req.user,{session: false}, async(error)=>{
+            
+      if(error) return next(error);
+
+      return res.status(200).json(
+        RequestUtil.prepareResponse(
+          'SUCCESS',
+          'User information retrieved successfully',
+          {
+        user: req.user,
+          },
         )
       );
 
