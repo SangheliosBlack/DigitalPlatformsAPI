@@ -1,5 +1,9 @@
 ## Changelog
 
+### [00018] - [26/AGO/2025] - @JULIO VILLAGRANA
+- Use me and refresh token controllers added
+- Add filter per code version in features
+
 ### [00017] - [20/AGO/2025] - @JULIO VILLAGRANA
 - Release filteres by version code
 

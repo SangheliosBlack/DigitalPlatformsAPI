@@ -26,6 +26,8 @@ router.post('/login',[
 
 router.use(passport.authenticate('jwt', { session: false }));
 
-router.post('/refreshToken',checkPermissions('read','all'),AuthController.refreshToken);
+router.get('/refreshToken',checkPermissions('read','all'),AuthController.refreshToken);
+
+router.get('/userMe',checkPermissions('read','all'),AuthController.userMe);
 
 export default router;

@@ -33,6 +33,11 @@ const Feature_Schema = new Schema(
     status:{
       type:Number,
       required: true,
+    },
+    version_code: {
+      type: Schema.Types.ObjectId,
+      ref: "version_codes",
+      required: true,
     }
   },
   {
