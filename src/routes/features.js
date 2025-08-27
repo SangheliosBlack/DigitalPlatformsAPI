@@ -22,4 +22,6 @@ router.patch("/:id", checkPermissions('read','all'),validateMongoId, validateSch
 
 router.delete("/:id", checkPermissions('read','all'),validateMongoId, FeaturesController.deleteFeatures);
 
+router.post("/migrate", checkPermissions('read','all'), FeaturesController.migrateFeatures);
+
 export default router;
