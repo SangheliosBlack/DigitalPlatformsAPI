@@ -237,7 +237,7 @@ var FeaturesController = {
 
       await newFeature.save();
 
-      var feature = await Feature.findById(newFeature.id).populate('user', 'id full_name image_url');
+      var feature = await Feature.findById(newFeature.id).populate('user', 'id full_name image_url').populate('version_code', 'id code');
 
       const answers = await RatingImprovements.find();
 
