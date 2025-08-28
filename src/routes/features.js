@@ -18,7 +18,7 @@ router.get("/:id", checkPermissions('read','all'),validateMongoId, FeaturesContr
 
 router.post("/", checkPermissions('read','all'),validateSchema(validator.featuresCreateSchema), FeaturesController.createFeatures);
 
-router.patch("/:id", checkPermissions('read','all'),validateMongoId, validateSchema(validator.featuresCreateSchema) ,FeaturesController.updateFeatures);
+router.patch("/:id", checkPermissions('read','all'),validateMongoId, validateSchema(validator.featuresUpdateSchema) ,FeaturesController.updateFeature);
 
 router.delete("/:id", checkPermissions('read','all'),validateMongoId, FeaturesController.deleteFeatures);
 

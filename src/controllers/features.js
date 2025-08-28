@@ -6,6 +6,7 @@ import Feature from '../models/features.js';
 import FeatureSurvery from '../models/features_surveys.js';
 import Improvements from '../models/improvements.js';
 import RatingImprovements from '../models/rating_features.js';
+import VersionCode from '../models/version_codes.js';
 
 import mongoose from "mongoose";
 
@@ -260,11 +261,42 @@ var FeaturesController = {
 
   }),
 
-  updateFeatures: catchAsync(async (req, res, next) => {
+  updateFeature: catchAsync(async (req, res, next) => {
 
     try {
 
-      res.status(200).json(RequestUtil.prepareResponse('SUCCESS', 'Update Features succesfully',{}));
+      const { id } = req.params;
+      const { version_code, ...updateData } = req.body;
+
+      const feature = await Feature.findById(id);
+      
+      if (!feature) {
+        
+        return res.status(404).json(
+          
+          RequestUtil.prepareResponse('FAIL', 'Feature not found', {})
+          
+        );
+        
+      }
+      
+      const versionCode = await VersionCode.findById(version_code);
+
+      if (!versionCode) {
+        
+        return res.status(404).json(
+          
+          RequestUtil.prepareResponse('FAIL', 'Version coe not found', {})
+          
+        );
+        
+      }
+
+      await Feature.findByIdAndUpdate(id,{ $set: updateData },{ new: true, runValidators: true });
+
+      const updatedFeature = await Feature.findById(id).populate('user', 'id full_name image_url').populate('version_code', 'id code');
+
+      res.status(200).json(RequestUtil.prepareResponse('SUCCESS', 'Update Feature succesfully',updatedFeature));
 
     } catch (error) {
 
