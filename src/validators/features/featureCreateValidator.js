@@ -22,5 +22,9 @@ const featureCreateSchema = Joi.object({
     "string.pattern.base": "ID must be a valid MongoDB ObjectId",
     "any.required": "ID is required"
   }),
+  version_code: Joi.string().regex(/^[0-9a-fA-F]{24}$/).required().messages({
+    "string.pattern.base": "Version code must be a valid MongoDB ObjectId",
+    "any.required": "Version code is required"
+  })
 });
 export default featureCreateSchema;
