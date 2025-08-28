@@ -1,5 +1,8 @@
 ## Changelog
 
+### [00020] - [27/AGO/2025] - @JULIO VILLAGRANA
+- Now can edit features
+
 ### [00019] - [27/AGO/2025] - @JULIO VILLAGRANA
 - Create feature now can use version code
 
