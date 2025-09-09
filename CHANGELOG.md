@@ -1,5 +1,8 @@
 ## Changelog
 
+### [00021] - [08/SEP/2025] - @JULIO VILLAGRANA
+- Add media url to releases
+
 ### [00020] - [27/AGO/2025] - @JULIO VILLAGRANA
 - Now can edit features
 

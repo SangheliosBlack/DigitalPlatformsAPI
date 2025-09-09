@@ -19,6 +19,11 @@ const Release_Schema = new Schema(
       required: false,
       default: null
     },
+    media_url: {
+      type: String,
+      required: false,
+      default: null
+    },
     user: {
       type: Schema.Types.ObjectId,
       ref: "users",
