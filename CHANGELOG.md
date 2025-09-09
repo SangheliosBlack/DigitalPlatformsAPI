@@ -1,5 +1,8 @@
 ## Changelog
 
+### [00022] - [09/SEP/2025] - @JULIO VILLAGRANA
+- New PWA version
+
 ### [00021] - [08/SEP/2025] - @JULIO VILLAGRANA
 - Add media url to releases
 
