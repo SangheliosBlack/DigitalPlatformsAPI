@@ -27,4 +27,7 @@ export default async function loadRoutes(app, routes) {
   const versionCodes = await import('./routes/version_codes.js');
   app.use(routes.versionCodes,versionCodes.default);
 
+  const roadmap = await import('./routes/roadmap.js');
+  app.use(routes.roadmap,roadmap.default);
+
 }

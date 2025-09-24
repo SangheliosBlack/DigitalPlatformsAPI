@@ -1,5 +1,8 @@
 ## Changelog
 
+### [00023] - [23/SEP/2025] - @JULIO VILLAGRANA
+- Add Roadmap categories
+
 ### [00022] - [09/SEP/2025] - @JULIO VILLAGRANA
 - New PWA version
 

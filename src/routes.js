@@ -12,4 +12,5 @@ export default {
   featuresSurvey:  buildPath(apiVersion,'/featureSurvey'),
   commercialFigures: buildPath(apiVersion,'/commercialFigures'),
   versionCodes: buildPath(apiVersion,'/versionCodes'),
+  roadmap: buildPath(apiVersion,'/roadmap')
 };
